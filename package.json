@@ -1,0 +1,8 @@
+{
+    "name": "first-project-keras",
+    "description": "My first keras project",
+    "version": "1.0.0",
+    "devDependencies": {
+        "keras-js": "^1.0.2"
+    }
+}
