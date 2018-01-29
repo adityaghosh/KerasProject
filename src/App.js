@@ -32,12 +32,12 @@ class App extends Component {
     var video = document.getElementById('video');
     var btnReset = document.getElementById('reset');
     var btnSnap = document.getElementById('snap');
-    context.drawImage(video, 0, 0, 380, 260);
+    context.drawImage(video, 0, 0, 640, 480);
     canvas.style.visibility = "visible";
     video.style.visibility = "hidden";
     btnReset.style.visibility = "visible";
     btnSnap.style.visibility = "hidden";
-    console.log(context.getImageData(0, 0, 380, 260));
+    console.log(context.getImageData(0, 0, 640, 480));
   }
 
   resetPicture = () => {
@@ -64,10 +64,10 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
           <Gallery photos={PHOTO_SET} />
           <div>
-            <video id="video" width="380" height="260" autoPlay style={STYLE.video}></video>
-            <canvas id="canvas" width="380" height="260"></canvas>
+            <video id="video" width="640" height="480" autoPlay style={STYLE.video}></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
           </div>
-          <button id="snap" onClick={this.takePicture}>Snap Photo</button>
+          <button id="snap" onClick={this.takePicture} style={STYLE.video}>Snap Photo</button>
           <button id="reset" onClick={this.resetPicture} style={STYLE.btnReset}>Reset</button>
         </p>
         
