@@ -25,19 +25,31 @@ class App extends Component {
         });
     }
   }
-  // takePicture() {
-  //   this.camera.capture()
-  //   .then(blob => {
-  //     this.img.src = URL.createObjectURL(blob);
-  //     this.img.onload = () => { URL.revokeObjectURL(this.src); }
-  //   })
-  // }
 
   takePicture = () => {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     var video = document.getElementById('video');
+    var btnReset = document.getElementById('reset');
+    var btnSnap = document.getElementById('snap');
     context.drawImage(video, 0, 0, 380, 260);
+    canvas.style.visibility = "visible";
+    video.style.visibility = "hidden";
+    btnReset.style.visibility = "visible";
+    btnSnap.style.visibility = "hidden";
+    console.log(context.getImageData(0, 0, 380, 260));
+  }
+
+  resetPicture = () => {
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var btnReset = document.getElementById('reset');
+    var btnSnap = document.getElementById('snap');
+    var video = document.getElementById('video');
+    canvas.style.visibility = "hidden";
+    btnReset.style.visibility = "hidden";
+    btnSnap.style.visibility = "visible";
+    video.style.visibility = "visible";
   }
 
   render() {
@@ -51,34 +63,17 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
           <Gallery photos={PHOTO_SET} />
-          <video id="video" width="380" height="260" autoPlay></video>
+          <div>
+            <video id="video" width="380" height="260" autoPlay style={STYLE.video}></video>
+            <canvas id="canvas" width="380" height="260"></canvas>
+          </div>
           <button id="snap" onClick={this.takePicture}>Snap Photo</button>
-          <canvas id="canvas" width="380" height="260"></canvas>
+          <button id="reset" onClick={this.resetPicture} style={STYLE.btnReset}>Reset</button>
         </p>
         
        
       </div>
-        /* 
-        <input type="file" accept="video/*;capture=camcorder">
-        <input type="file" accept="image/*" capture />
-          <div style={style.container}>
-          <Camera
-            style={style.preview}
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-          >
-            <div style={style.captureContainer} onClick={this.takePicture}>
-              <div style={style.captureButton} />
-            </div>
-          </Camera>
-          <img
-            style={style.captureImage}
-            ref={(img) => {
-              this.img = img;
-            }}
-          />
-        </div> */
+        
       
       
     );
@@ -97,30 +92,9 @@ const PHOTO_SET = [
   //   height: 1
   // }
 ];
-
-// const style = {
-//   preview: {
-//     position: 'relative',
-//   },
-//   captureContainer: {
-//     display: 'flex',
-//     position: 'absolute',
-//     justifyContent: 'center',
-//     zIndex: 1,
-//     bottom: 0,
-//     width: '100%'
-//   },
-//   captureButton: {
-//     backgroundColor: '#fff',
-//     borderRadius: '50%',
-//     height: 56,
-//     width: 56,
-//     color: '#000',
-//     margin: 20
-//   },
-//   captureImage: {
-//     width: '100%',
-//   }
-// };
+const STYLE = {
+  btnReset: {visibility:'hidden'},
+  video:{position:'absolute'}
+};
 
 export default App;
